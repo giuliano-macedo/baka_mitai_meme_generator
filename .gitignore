@@ -1,0 +1,5 @@
+__pycache__
+results/
+input/
+data/*
+!data/README.md
