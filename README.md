@@ -20,7 +20,7 @@ pip install -r requirements.txt
 ```shell
 ./main.py [image path]
 ```
-results will be saved to the folder `./results`
+results will be saved in the folder `./results`
 
 # acknowledgements
 thanks to [mohammedri](https://github.com/mohammedri) for his awesome [First Order Motion Model repo](https://github.com/AliaksandrSiarohin/first-order-model/blob/master/LICENSE.md)
