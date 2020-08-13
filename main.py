@@ -7,6 +7,7 @@ parser.add_argument("image")
 parser.add_argument("-a","--adversary",action="store_true")
 parser.add_argument("-r","--relative",action="store_false")
 parser.add_argument("-A","--adapt-movement-scale",action="store_false")
+parser.add_argument("-c","--cpu",action="store_true",help="Use CPU instead of CUDA GPU")
 
 args=parser.parse_args()
 
@@ -32,7 +33,8 @@ def create_results_dir():
 print("loading model,","using" if args.adversary else "not using","adversary")
 generator, kp_detector = load_checkpoints(
 	config_path='./first-order-model/config/vox-256.yaml', 
-    checkpoint_path='./data/vox-cpk.pth.tar' if not args.adversary else "./data/vox-adv-cpk.pth.tar"
+    checkpoint_path='./data/vox-cpk.pth.tar' if not args.adversary else "./data/vox-adv-cpk.pth.tar",
+    cpu=args.cpu
 )
 
 print("loading input")
@@ -45,7 +47,8 @@ print("making predictions")
 predictions = make_animation(
 	source_image, driving_video, generator, kp_detector,
 	relative=args.relative,
-	adapt_movement_scale=args.adapt_movement_scale
+	adapt_movement_scale=args.adapt_movement_scale,
+	cpu=args.cpu
 )
 create_results_dir()
 
