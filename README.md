@@ -2,11 +2,11 @@
 
 ## hardware requirements
 
-* CUDA GPU [Optional]
-* \~3.7GB of RAM in GPU mode, and \~2.4GB in CPU mode
+* CUDA compatible GPU [Optional]
+* \~3.7GB of RAM in GPU mode, or \~2.4GB in CPU mode
 
-It is recomended to have a CUDA compatible GPU, since running on the CPU would take 
-several hours depending on your system.
+It is recomended to have a CUDA compatible GPU, since running on the CPU could take 
+hours depending on your system.
 
 
 ## pre-requirements
