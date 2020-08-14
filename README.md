@@ -1,4 +1,4 @@
-# [Bakai Mitai meme]((https://knowyourmeme.com/memes/dame-da-ne-baka-mitai)) generator using First Order Motion Model
+# [Bakai Mitai meme](https://knowyourmeme.com/memes/dame-da-ne-baka-mitai) generator using First Order Motion Model
 
 ## hardware requirements
 
