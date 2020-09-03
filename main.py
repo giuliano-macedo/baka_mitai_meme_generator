@@ -13,13 +13,15 @@ args=parser.parse_args()
 
 assert(os.path.isfile(args.image))
 
+print("loading libraries")
+
 import imageio
 from skimage.transform import resize
 import warnings
 import sys;sys.path.append("./first-order-model")
 from demo import load_checkpoints,make_animation
 from skimage import img_as_ubyte
-from subprocess import check_output
+from subprocess import run
 import shlex
 warnings.filterwarnings("ignore")
 
@@ -58,8 +60,12 @@ output_audio=os.path.join	("results",fname_no_ext+"_audio.mp4")
 
 print("saving",output_no_audio)
 imageio.mimsave(output_no_audio, [img_as_ubyte(frame) for frame in predictions], fps=30)
-print("adding audio",output_audio)
 
-check_output(shlex.split(
-	f"ffmpeg -y -i {output_no_audio} -i data/template.mp3 -codec copy -shortest {output_audio}"
-))
+print("adding audio",output_audio)
+cmd=f"ffmpeg -y -i {output_no_audio} -i data/template.mp3 -codec copy -shortest {output_audio}"
+ret=run(shlex.split(cmd),capture_output=True)
+if ret.returncode!=0:
+	print(f"ERROR EXECUTING '{cmd}'")
+	print("-"*48)
+	print(ret.stderr)
+	print("-"*48)
