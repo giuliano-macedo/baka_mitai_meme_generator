@@ -61,5 +61,5 @@ imageio.mimsave(output_no_audio, [img_as_ubyte(frame) for frame in predictions],
 print("adding audio",output_audio)
 
 check_output(shlex.split(
-	f"ffmpeg -y -i {output_no_audio} -i data/dame.mp3 -codec copy -shortest {output_audio}"
+	f"ffmpeg -y -i {output_no_audio} -i data/template.mp3 -codec copy -shortest {output_audio}"
 ))
