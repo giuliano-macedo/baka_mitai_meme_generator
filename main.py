@@ -69,3 +69,6 @@ if ret.returncode!=0:
 	print("-"*48)
 	print(ret.stderr)
 	print("-"*48)
+	exit(-1)
+
+print("done.")
