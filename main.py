@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-import os
+from pathlib import Path
 import argparse
 
+RESULTS_PATH=Path("./results")
+
 parser=argparse.ArgumentParser()
-parser.add_argument("image")
+parser.add_argument("image",type=Path)
 parser.add_argument("-a","--adversary",action="store_true")
 parser.add_argument("-r","--relative",action="store_false")
 parser.add_argument("-A","--adapt-movement-scale",action="store_false")
@@ -11,7 +13,7 @@ parser.add_argument("-c","--cpu",action="store_true",help="Use CPU instead of CU
 
 args=parser.parse_args()
 
-assert(os.path.isfile(args.image))
+assert(args.image.is_file())
 
 print("loading libraries")
 
@@ -24,13 +26,6 @@ from skimage import img_as_ubyte
 from subprocess import run
 import shlex
 warnings.filterwarnings("ignore")
-
-def create_results_dir():
-	path="./results"
-	if os.path.exists(path) and not os.path.isdir(path):
-		raise RuntimeError(f"{os.getcwd()}/results is not a directory")
-	elif not os.path.exists(path):
-		os.mkdir(path)
 
 print("loading model,","using" if args.adversary else "not using","adversary")
 generator, kp_detector = load_checkpoints(
@@ -52,11 +47,11 @@ predictions = make_animation(
 	adapt_movement_scale=args.adapt_movement_scale,
 	cpu=args.cpu
 )
-create_results_dir()
+RESULTS_PATH.mkdir(exist_ok=True)
 
-fname_no_ext=os.path.splitext(os.path.split(args.image)[-1])[0]
-output_no_audio=os.path.join("results",fname_no_ext+".mp4")
-output_audio=os.path.join	("results",fname_no_ext+"_audio.mp4")
+output_base=str(RESULTS_PATH/Path(args.image.stem))
+output_no_audio=output_base+".mp4"
+output_audio=output_base+"_audio.mp4"
 
 print("saving",output_no_audio)
 imageio.mimsave(output_no_audio, [img_as_ubyte(frame) for frame in predictions], fps=30)
