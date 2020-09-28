@@ -49,9 +49,8 @@ predictions = make_animation(
 )
 RESULTS_PATH.mkdir(exist_ok=True)
 
-output_base=str(RESULTS_PATH/Path(args.image.stem))
-output_no_audio=output_base+".mp4"
-output_audio=output_base+"_audio.mp4"
+output_no_audio=RESULTS_PATH.joinpath(args.image.stem+".mp4")
+output_audio   =RESULTS_PATH.joinpath(args.image.stem+"_audio.mp4")
 
 print("saving",output_no_audio)
 imageio.mimsave(output_no_audio, [img_as_ubyte(frame) for frame in predictions], fps=30)
