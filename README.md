@@ -34,4 +34,4 @@ results will be saved in the folder `./results`
 use `./main.py --help` for more information.
 
 # acknowledgements
-Thanks to [mohammedri](https://github.com/mohammedri) for his awesome [First Order Motion Model repo](https://github.com/AliaksandrSiarohin/first-order-model)
+Thanks to [mohammedri](https://github.com/mohammedri) for his awesome [First Order Motion Model repo](https://github.com/AliaksandrSiarohin/first-order-model), **none changes to his original work were made**
